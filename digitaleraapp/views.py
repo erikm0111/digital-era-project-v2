@@ -1,5 +1,8 @@
-from django.http import HttpResponse
+from rest_framework import viewsets
 
+from .serializers import BusinessInfoSerializer
+from .models import BusinessInfo
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the Digital Era Project index.")
+class BusinessInfoViewSet(viewsets.ModelViewSet):
+    queryset = BusinessInfo.objects.all().order_by('name')
+    serializer_class = BusinessInfoSerializer
