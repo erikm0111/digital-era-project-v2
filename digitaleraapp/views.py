@@ -14,5 +14,8 @@ class BusinessInfoViewSet(viewsets.ModelViewSet):
 @api_view(['POST'])
 def analyzeUrlView(request):
     print('request', request.data['url'])
-    phoneNumbers = WebsiteAnalyzerService.analyzeUrl(request.data['url'])
-    return Response({'phone_numbers':phoneNumbers})
+    phoneNumbers, emails = WebsiteAnalyzerService.analyzeUrl(request.data['url'])
+    return Response({'data':{
+        'phoneNumbers': phoneNumbers,
+        'emails': emails
+    }})

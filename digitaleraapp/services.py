@@ -1,12 +1,11 @@
 from .phonenumberextractor import PhoneNumberExtractor
+from .emailextractor import EmailExtractor
 
 class WebsiteAnalyzerService(object):
     @staticmethod
     def analyzeUrl(url):
-        extractor = PhoneNumberExtractor()
-        matches = extractor.extract_phone_numbers(url)
-        return matches
-
-    def print_result(phone_nums):
-        result = ', '.join(phone_nums)
-        print(result)
+        phoneNumbersExtractor = PhoneNumberExtractor()
+        emailsExtractor = EmailExtractor()
+        phoneNumbers = phoneNumbersExtractor.extract_phone_numbers(url)
+        emails = emailsExtractor.extract_emails(url)
+        return phoneNumbers, emails
