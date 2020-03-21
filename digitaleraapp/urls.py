@@ -9,4 +9,8 @@ router.register(r'businessInfos', views.BusinessInfoViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     url(r'^analyzeUrl/$', views.analyzeUrlView),
+    path('users/', include('users.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+
 ]
