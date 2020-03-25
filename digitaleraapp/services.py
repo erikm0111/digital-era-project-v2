@@ -1,5 +1,6 @@
-from .phonenumberextractor import PhoneNumberExtractor
-from .emailextractor import EmailExtractor
+from digitaleraapp.business_logic.emailextractor import EmailExtractor
+from digitaleraapp.business_logic.phonenumberextractor import PhoneNumberExtractor
+
 
 class WebsiteAnalyzerService(object):
     @staticmethod

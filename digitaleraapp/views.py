@@ -8,8 +8,16 @@ from .serializers import BusinessInfoSerializer
 from .models import BusinessInfo
 
 class BusinessInfoViewSet(viewsets.ModelViewSet):
-    queryset = BusinessInfo.objects.all().order_by('id')
+    queryset = BusinessInfo.objects.all()
     serializer_class = BusinessInfoSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        user = self.request.user
+        return BusinessInfo.objects.filter(owner=user)
+
 
 @api_view(['POST'])
 def analyzeUrlView(request):

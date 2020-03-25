@@ -11,7 +11,7 @@ from rest_auth.serializers import UserDetailsSerializer as DefaultUserDetailsSer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CustomUser
-        fields = ('email', 'username', )
+        fields = ('id', 'email', 'username', )
 
 
 # This is to allow you to override the UserDetailsSerializer at any time.
