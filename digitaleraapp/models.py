@@ -12,3 +12,12 @@ class BusinessInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PhoneNumber(models.Model):
+    str_number = models.CharField(max_length=30)
+    business_owner = models.ForeignKey(BusinessInfo, related_name='phone_numbers', on_delete=models.CASCADE)
+
+class Email(models.Model):
+    email_address = models.CharField(max_length=40)
+    business_owner = models.ForeignKey(BusinessInfo, related_name='emails', on_delete=models.CASCADE)
