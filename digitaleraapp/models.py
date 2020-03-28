@@ -21,3 +21,10 @@ class PhoneNumber(models.Model):
 class Email(models.Model):
     email_address = models.CharField(max_length=40)
     business_owner = models.ForeignKey(BusinessInfo, related_name='emails', on_delete=models.CASCADE)
+
+class WebsitePerformanceAudit(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
+    overall_savings_ms = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+    display_value = models.CharField(max_length=300, blank=True)
+    business_owner = models.ForeignKey(BusinessInfo, related_name='performance_audits', on_delete=models.CASCADE)
