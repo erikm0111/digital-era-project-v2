@@ -14,6 +14,9 @@ class BusinessInfoViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
+
     def get_queryset(self):
         user = self.request.user
         return BusinessInfo.objects.filter(owner=user)
