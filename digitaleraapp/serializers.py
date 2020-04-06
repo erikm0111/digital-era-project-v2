@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import BusinessInfo, PhoneNumber, Email, WebsitePerformanceAudit
+from .models import BusinessInfo, PhoneNumber, Email, WebsitePerformanceAudit, Template
 
 class PhoneNumberSerializer(serializers.ModelSerializer):
     class Meta:
@@ -85,3 +85,11 @@ class BusinessInfoSerializer(serializers.ModelSerializer):
             perf_audit.save()
 
         return instance
+
+class TemplateSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Template
+        fields = ('id', 'name', 'description', 'type', 'content', 'owner')
+        read_only_fields = ('id', 'owner')

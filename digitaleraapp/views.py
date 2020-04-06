@@ -1,11 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.views import APIView
 from .services import WebsiteAnalyzerService
 
-from .serializers import BusinessInfoSerializer
-from .models import BusinessInfo
+from .serializers import BusinessInfoSerializer, TemplateSerializer
+from .models import BusinessInfo, Template
 
 class BusinessInfoViewSet(viewsets.ModelViewSet):
     queryset = BusinessInfo.objects.all()
@@ -21,6 +20,20 @@ class BusinessInfoViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return BusinessInfo.objects.filter(owner=user)
 
+
+class TemplateViewSet(viewsets.ModelViewSet):
+    queryset = Template.objects.all()
+    serializer_class = TemplateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        user = self.request.user
+        return Template.objects.filter(owner=user)
 
 @api_view(['POST'])
 def analyzeUrlView(request):
